@@ -68,8 +68,7 @@ declare class Level {
     ignoreGroup?: boolean,
   ): int;
   RemoveCompassEffect(): void;
-  RemoveCurse(levelCurse: LevelCurse | int): void;
-  RemoveCurses(): void;
+  RemoveCurses(levelCurse: LevelCurse | int): void;
   SetCanSeeEverything(value: boolean): void;
   SetHeartPicked(): void;
   SetNextStage(): void;
