@@ -1,4 +1,5 @@
-// The Binding of Isaac: Rebirth Lua API expects certain values as either integers or floats
+// The Binding of Isaac: Rebirth Lua API expects certain values as either integers or floats,
+// so we define those types here
 
 /**
  * TypeScript does not support integers.
