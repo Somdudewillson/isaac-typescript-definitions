@@ -4,6 +4,10 @@
 // https://www.typescriptlang.org/docs/handbook/enums.html
 // Alternatively, we could create new global enums, but that would pollute the global namespace
 
+// Some of the official enums repeat themselves inside of the properties
+// e.g. "CollectibleType.COLLECTIBLE_SAD_ONION" is better written as "CollectibleType.SAD_ONION"
+// As a standard, enums in this file do not use any unnecessary prefixes
+
 /** For EntityType.ENTITY_PLAYER (1) */
 declare const enum PlayerVariant {
   PLAYER = 0,
@@ -29,45 +33,45 @@ declare const enum SlotVariant {
 /** For EntityType.ENTITY_LASER (7) */
 declare const enum LaserVariant {
   /** Used for Brimstone. */
-  LASER_THICK_RED = 1,
+  THICK_RED = 1,
   /** Used for Technology. */
-  LASER_THIN_RED = 2,
-  LASER_SHOOP_DA_WHOOP = 3,
+  THIN_RED = 2,
+  SHOOP_DA_WHOOP = 3,
   /** Looks like a squiggly line. */
-  LASER_PRIDE = 4,
+  PRIDE = 4,
   /** Used for Angel lasers. */
-  LASER_LIGHT_BEAM = 5,
+  LIGHT_BEAM = 5,
   /** Used for Mega Blast. */
-  LASER_GIANT_RED = 6,
-  LASER_TRACTOR_BEAM = 7,
+  GIANT_RED = 6,
+  TRACTOR_BEAM = 7,
   /** Used for Circle of Protection; looks like a thinner Angel laser. */
-  LASER_LIGHT_RING = 8,
+  LIGHT_RING = 8,
   /** Used for Brimstone + Technology. */
-  LASER_BRIMTECH = 9,
+  BRIMTECH = 9,
+}
+
+/** For EntityType.ENTITY_FIREPLACE (33) */
+declare const enum FireplaceVariant {
+  NORMAL = 0,
+  RED = 1,
+  BLUE = 2,
+  PURPLE = 3,
+  WHITE = 4,
+  MOVEABLE = 10,
+  COAL = 11,
+  MOVEABLE_BLUE = 12,
+  MOVEABLE_PURPLE = 13,
 }
 
 /** For GridEntityType.GRID_POOP (14) */
 declare const enum PoopVariant {
-  POOP_NORMAL = 0,
-  POOP_RED = 1,
-  POOP_CORN = 2,
-  POOP_GOLDEN = 3,
-  POOP_RAINBOW = 4,
-  POOP_BLACK = 5,
-  POOP_WHITE = 6,
-}
-
-/**
- * For FamiliarVariant.BLUE_FLY (43)
- * This is analogous to the LocustSubtypes enum.
- */
-declare const enum BlueFlySubType {
-  BLUEFLY_NORMAL = 0,
-  BLUEFLY_RED = 1,
-  BLUEFLY_GREEN = 2,
-  BLUEFLY_YELLOW = 3,
-  BLUEFLY_BLACK = 4,
-  BLUEFLY_WHITE = 5,
+  NORMAL = 0,
+  RED = 1,
+  CORN = 2,
+  GOLDEN = 3,
+  RAINBOW = 4,
+  BLACK = 5,
+  WHITE = 6,
 }
 
 /** Used for the `gridspawn` console command. */
@@ -105,33 +109,17 @@ declare const enum PlateVariant {
   GREED_PLATE = 2,
 }
 
-declare const enum RoomTransition {
-  TRANSITION_NONE = 0,
-  TRANSITION_DEFAULT = 1,
-  TRANSITION_STAGE = 2,
-  TRANSITION_TELEPORT = 3,
-  TRANSITION_ANKH = 5,
-  TRANSITION_DEAD_CAT = 6,
-  TRANSITION_1UP = 7,
-  TRANSITION_GUPPYS_COLLAR = 8,
-  TRANSITION_JUDAS_SHADOW = 9,
-  TRANSITION_LAZARUS_RAGS = 10,
-  TRANSITION_GLOWING_HOURGLASS = 12,
-  TRANSITION_D7 = 13,
-  TRANSITION_MISSING_POSTER = 14,
-}
-
 declare const enum StageTransition {
-  TRANSITION_DISAPPEAR = 0,
-  TRANSITION_NONE = 1,
+  DISAPPEAR = 0,
+  NONE = 1,
 }
 
 declare const enum FadeoutTarget {
-  FADEOUT_FILE_SELECT = 0,
-  FADEOUT_MAIN_MENU = 1,
-  FADEOUT_TITLE_SCREEN = 2,
-  FADEOUT_RESTART_RUN = 3,
-  FADEOUT_RESTART_RUN_LAP = 4,
+  FILE_SELECT = 0,
+  MAIN_MENU = 1,
+  TITLE_SCREEN = 2,
+  RESTART_RUN = 3,
+  RESTART_RUN_LAP = 4,
   // 5 and higher results in a black screen
 }
 
@@ -150,7 +138,7 @@ declare const enum Controller {
   CPAD_RIGHT = 5,
   /** X, □ and Y on Xbox, Playstation and Nintendo respectively. */
   CPAD_LEFT = 6,
-  /** Y, Δ and X on Xbox, Playstation and Nintendo respectively. */
+  /** Y, �and X on Xbox, Playstation and Nintendo respectively. */
   CPAD_UP = 7,
   /** Left shoulder */
   BUTTON_LB = 8,
@@ -172,13 +160,13 @@ declare const enum Controller {
 
 declare const enum LineCheckMode {
   /** Stopped by pits and rocks (e.g. like a Gaper's behavior). */
-  MODE_NORMAL = 0,
+  NORMAL = 0,
   /** Same as MODE_NORMAL, but less resource-intensive. */
-  MODE_ECONOMIC = 1,
+  ECONOMIC = 1,
   /** Only blocked by walls and metal blocks. */
-  MODE_EXPLOSION = 2,
+  EXPLOSION = 2,
   /** Not blocked by pits. Used by enemies that shoot projectiles at you, such as Hosts. */
-  MODE_PROJECTILE = 3,
+  PROJECTILE = 3,
 }
 
 declare const enum ProjectilesMode {
@@ -232,73 +220,6 @@ declare const enum Ending {
   GREED_MODE = 21,
   THE_VOID = 22,
   GREEDIER = 23,
-}
-
-/** These are the types of possible champions that can spawn. */
-declare const enum ChampionColorIdx {
-  /** No champion. */
-  REGULAR = -1,
-  /** 2.5x amount of HP. */
-  VIVID_RED = 0,
-  /** Increased movement speed. */
-  DARK_YELLOW = 1,
-  /** Leaves green creep as it walks. */
-  STRONG_LIME_GREEN = 2,
-  /** Attacks cause you to drop coins (like Greed or a Hanger). */
-  VIVID_ORANGE = 3,
-  /** Decreased speed. */
-  VIVID_BLUE = 4,
-  /** Explodes when killed. */
-  DARK_CYAN = 5,
-  /** Invincible until all other enemies are killed. */
-  WHITE = 6,
-  /** 2/3 health, decreased speed. */
-  DARK_GRAY = 7,
-  /** Tears become spectral tears, and it can move past environmental obstacles. */
-  TRANSPARENT_WHITE = 8,
-  /** Fades in and out of visibility. */
-  BLACK = 9,
-  /** Periodically shoots short-ranged blood shots. */
-  PURE_MAGENTA = 10,
-  /** Pulls the player (and tears) towards itself. */
-  MOSTLY_PURE_VIOLET = 11,
-  /** Collapses into a flesh pile upon death and regenerates if not finished off. */
-  DARK_RED = 12,
-  /** Releases blood shots in 8 directions when killed. */
-  VERY_LIGHT_BLUE = 13,
-  /** The enemy blends into the background and briefly becomes visible when damaged. */
-  CAMOUFLAGE = 14,
-  /** Splits into two copies of itself upon death. */
-  PULSING_STRONG_LIME = 15,
-  /** Repels Isaac's shots when it pulses. */
-  PULSING_DARK_GRAY,
-  /** Has 1-2 Eternal Flies circling it. Spawns another fly upon death. */
-  LIGHT_WHITE = 17,
-  /** Decreased health, increased speed. Smaller and more difficult to hit. */
-  SMALL = 18,
-  /**
-   * Increased health, slightly decreased speed. Larger and easier to hit. Deals two full hearts of
-   * damage.
-   */
-  LARGE = 19,
-  /**
-   * All other enemies in the room regenerate health at the rate of 20 HP per second while this
-   * enemy is alive.
-   */
-  PULSING_VIVID_RED = 20,
-  /**
-   * Spawns an Attack Fly on hit. After each hit, there is a delay until the next hit results in
-   * another Attack Fly. A single Pulsating enemy can have up to 5 Attack Flies at once.
-   */
-  PULSATING = 21,
-  /**
-   * Increased health. All enemies in the room that are not champions will turn yellow while the
-   * crowned enemy is alive. The affected enemies will drop batteries like yellow champions upon
-   * dying.
-   */
-  CROWN = 22,
-  /** Produces a The Necronomicon effect upon death. Deals two full hearts of damage. */
-  SKULL = 23,
 }
 
 /** Matches the IDs in the "specialrooms.stb" file. */
@@ -377,62 +298,10 @@ declare const enum BossIDs {
   THE_MATRIARCH = 72,
 }
 
-/** Matches the IDs in the "backdrops.xml" file. */
-declare const enum Backdrop {
-  BASEMENT = 1,
-  CELLAR = 2,
-  BURNING_BASEMENT = 3,
-  CAVES = 4,
-  CATACOMBS = 5,
-  DROWNED_CAVES = 6,
-  DEPTHS = 7,
-  NECROPOLIS = 8,
-  DANK_DEPTHS = 9,
-  WOMB = 10,
-  UTERO = 11,
-  SCARRED_WOMB = 12,
-  BLUE_WOMB = 13,
-  SHEOL = 14,
-  CATHEDRAL = 15,
-  DARK_ROOM = 16,
-  CHEST = 17,
-  MEGA_SATAN = 18,
-  LIBRARY = 19,
-  SHOP = 20,
-  ISAACS_ROOM = 21,
-  BARREN_ROOM = 22,
-  SECRET_ROOM = 23,
-  DICE_ROOM = 24,
-  ARCADE = 25,
-  ERROR_ROOM = 26,
-  BLUE_SECRET = 27,
-  ULTRA_GREED_SHOP = 28,
-  NUM_BACKDROPS = 29,
-}
-
 declare const enum Dimension {
   CURRENT = -1,
   MAIN = 0,
-  SECONDARY = 1 /** Used by the mirror sequence and the escape sequence */,
+  /** Used by the mirror sequence and the escape sequence */
+  SECONDARY = 1,
   DEATH_CERTIFICATE = 2,
-}
-
-declare const enum ActiveSlot {
-  SLOT_NONE = -1,
-  SLOT_PRIMARY = 0,
-  SLOT_SECONDARY = 1,
-  SLOT_POCKET = 2,
-  SLOT_POCKET2 = 3,
-}
-
-declare const enum FireplaceVariant {
-  FIREPLACE_NORMAL = 0,
-  FIREPLACE_RED = 1,
-  FIREPLACE_BLUE = 2,
-  FIREPLACE_PURPLE = 3,
-  FIREPLACE_WHITE = 4,
-  FIREPLACE_MOVEABLE = 10,
-  COAL = 11,
-  FIREPLACE_MOVEABLE_BLUE = 12,
-  FIREPLACE_MOVEABLE_PURPLE = 13,
 }

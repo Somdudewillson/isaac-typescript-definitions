@@ -411,18 +411,19 @@ declare class EntityPlayer extends Entity {
   /**
    * @param weaponType Default is WeaponType.WEAPON_TEARS.
    */
+  // MultiShotParams is not implemented
+  /*
   GetMultiShotParams(
-    // TODO check to see if MultiShotParams is implemented
     weaponType?: WeaponType,
-  ): int; // MultiShotParams // MultiShotParams is not implemented
+  ): MultiShotParams;
   GetMultiShotPositionVelocity(
-    // TODO check to see if MultiShotParams is implemented
     loopIndex: int,
     weaponType: WeaponType,
     shotDirection: Vector,
     shotSpeed: float,
-    multiShotParams: int, // MultiShotParams, // MultiShotParams is not implemented
+    multiShotParams: MultiShotParams, // MultiShotParams is not implemented
   ): PosVel;
+  */
   GetNPCTarget(): Entity;
   GetName(): string;
   GetNumBlueFlies(): int;
@@ -664,7 +665,7 @@ declare class EntityPlayer extends Entity {
    * @param collectibleType
    * @param useFlag Default is 0.
    * @param activeSlot The active slot this item was used from.
-   * (Set to ActiveSlot.SLOT_NONE if this item wasn't triggered by any active slot.)
+   * (Set to -1 if this item wasn't triggered by any active slot.)
    * Default is ActiveSlot.SLOT_PRIMARY.
    */
   UseActiveItem(
@@ -679,7 +680,7 @@ declare class EntityPlayer extends Entity {
    * @param allowNonMainPlayer
    * @param toAddCostume
    * @param activeSlot The active slot this item was used from.
-   * (Set to ActiveSlot.SLOT_NONE if this item wasn't triggered by any active slot.)
+   * (Set to -1 if this item wasn't triggered by any active slot.)
    * Default is ActiveSlot.SLOT_PRIMARY.
    */
   UseActiveItem(

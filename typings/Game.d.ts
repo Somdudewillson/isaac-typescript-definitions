@@ -156,7 +156,10 @@ declare class Game {
    * @param frameCount
    * @param hallucinationBackdrop Default is BackdropType.NUM_BACKDROPS.
    */
-  ShowHallucination(frameCount: int, hallucinationBackdrop?: Backdrop): void;
+  ShowHallucination(
+    frameCount: int,
+    hallucinationBackdropType?: BackdropType,
+  ): void;
   ShowRule(): void;
   Spawn(
     entityType: EntityType | int,
@@ -193,6 +196,8 @@ declare class Game {
     subType?: int,
   ): void;
   /**
+   * You have to set Level.LeaveDoor to an appropriate value before using this function. Otherwise,
+   * you will be sent to the wrong room. (For teleports, set it to -1.)
    * @param roomIndex
    * @param direction
    * @param roomTransition Default is RoomTransitionAnim.WALK.
@@ -202,7 +207,7 @@ declare class Game {
   StartRoomTransition(
     roomIndex: int,
     direction: Direction,
-    roomTransition?: RoomTransition,
+    roomTransitionAnim?: RoomTransitionAnim,
     player?: EntityPlayer,
     dimension?: Dimension,
   ): void;
