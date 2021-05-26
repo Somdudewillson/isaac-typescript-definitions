@@ -1,5 +1,5 @@
 declare class GridEntityPit extends GridEntity {
-  MakeBridge(): void;
+  MakeBridge(bridgeSource: GridEntity): void;
   SetLadder(value: boolean): void;
   UpdateCollision(): void;
 
