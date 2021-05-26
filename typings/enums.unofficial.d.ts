@@ -228,9 +228,9 @@ declare const enum Controller {
   CPAD_DOWN = 4,
   /** B, O and A on Xbox, Playstation and Nintendo respectively. */
   CPAD_RIGHT = 5,
-  /** X, □ and Y on Xbox, Playstation and Nintendo respectively. */
+  /** X, â–¡ and Y on Xbox, Playstation and Nintendo respectively. */
   CPAD_LEFT = 6,
-  /** Y, �and X on Xbox, Playstation and Nintendo respectively. */
+  /** Y, Δ and X on Xbox, Playstation and Nintendo respectively. */
   CPAD_UP = 7,
   /** Left shoulder */
   BUTTON_LB = 8,
