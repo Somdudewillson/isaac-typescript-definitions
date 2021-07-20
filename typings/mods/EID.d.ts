@@ -10,6 +10,7 @@ declare type EIDDescriptionObj = {
   Description: string;
   Transformation: string;
 };
+
 /**
  * @param LeftOffset defaults to -1
  * @param TopOffset defaults to 0
@@ -24,6 +25,7 @@ declare type EIDInlineIcon = [
   TopOffset?: int,
   SpriteObject?: Sprite,
 ];
+
 declare type EIDTransformationTargetType =
   | "collectible"
   | "trinket"
@@ -39,6 +41,7 @@ declare class ExternalItemDescriptions {
     itemName?: string,
     language?: string,
   ): void;
+
   /** Adds a description for a trinket. */
   addTrinket(
     id: int,
@@ -46,6 +49,7 @@ declare class ExternalItemDescriptions {
     itemName?: string,
     language?: string,
   ): void;
+  
   /** Adds a description for a card/rune. */
   addCard(
     id: int,
@@ -53,6 +57,7 @@ declare class ExternalItemDescriptions {
     itemName?: string,
     language?: string,
   ): void;
+  
   /** Adds a description for a pilleffect id. */
   addPill(
     id: int,
@@ -75,6 +80,7 @@ declare class ExternalItemDescriptions {
     displayName: string,
     language?: string,
   ): void;
+
   /**
    * Assigns transformations to an entity (Adds to existing transformations).
    *
@@ -88,6 +94,7 @@ declare class ExternalItemDescriptions {
     targetIdentifier: string | int,
     transformationString: string,
   ): void;
+
   /**
    * Removes a transformation from an entity.
    *
@@ -143,6 +150,7 @@ declare class ExternalItemDescriptions {
     topOffset: float | null,
     spriteObject: Sprite,
   ): void;
+
   /**
    * Adds a new color object with the shortcut defined in the "shortcut" variable (e.g. "{{shortcut}}" = your color).
    *
@@ -161,11 +169,13 @@ declare class ExternalItemDescriptions {
    * {@link EID.hidePermanentText EID:hidePermanentText()}.
    */
   displayPermanentText(descriptionObject: EIDDescriptionObj): void;
+
   /** Hides permanently displayed text objects if they exist. */
   hidePermanentText(): void;
 
   /** Turns entity type names into actual ingame ID.Variant pairs. */
   getIDVariantString(typeName: string): string;
+
   /** Turns entity type and variants into their EID table-name. */
   getTableName(Type: int, Variant: int, SubType: int): string;
 
@@ -174,23 +184,27 @@ declare class ExternalItemDescriptions {
 
   /** Returns if EID is displaying text right now. */
   isDisplayingText(): boolean;
+
   /** Returns `true`, if curse of blind is active. */
   hasCurseBlind(): boolean;
 
   /** Returns the current text position. */
   getTextPosition(): Vector;
+
   /**
    * Adds a text position modifier `Vector`, which will be applied to the text position variable.
    *
    * Useful to add small offsets. For example: for schoolbag HUD.
    */
   addTextPosModifier(identifier: string, modifierVector: Vector): void;
+
   /**
    * Removes a text position modifier `Vector`.
    *
    * Useful to remove small offsets. For example: for schoolbag HUD.
    */
   removeTextPosModifier(identifier: string): void;
+
   /**
    * Changes the initial position of all EID descriptions.
    *
@@ -210,6 +224,7 @@ declare class ExternalItemDescriptions {
    * Falls back to English if the objID isn't available.
    */
   getDescriptionObj(Type: int, Variant: int, SubType: int): EIDDescriptionObj;
+
   /**
    * Fetches description table from the legacy mod descriptions if they exist.
    *
@@ -220,12 +235,14 @@ declare class ExternalItemDescriptions {
     Variant: int,
     SubType: int,
   ): ["", "", string] | ["", string, string] | null;
+
   /**
    * Returns the specified object table in the current language.
    *
    * Falls back to English if it doesn't exist.
    */
   getDescriptionEntry(objTable: string, objID?: string): EIDDescriptionObj;
+
   /**
    * Returns the description data table in the current language related to a given id, variant and subtype.
    *
@@ -235,6 +252,7 @@ declare class ExternalItemDescriptions {
 
   /** Returns an adjusted SubType id for special cases like Horse Pills and Golden Trinkets. */
   getAdjustedSubtype(Type: int, Variant: int, SubType: int): int;
+
   /**
    * Gets the transformation uniqueName / ID of a given entity.
    *
@@ -248,9 +266,12 @@ declare class ExternalItemDescriptions {
    * (Note: this function might be broken)
    */
   getTransformationName(id: string): string;
+
   /** Tries to get the ingame name of an item based on its ID. */
   getObjectName(Type: int, Variant: int, SubType: int): string;
-  /** Tries to get the ingame description of an object, based on their description in the XML files.
+
+  /**
+   * Tries to get the ingame description of an object, based on their description in the XML files.
    * @returns `"(No Description available)"` if it cannot find the given object's description.
    */
   getXMLDescription(
@@ -258,33 +279,39 @@ declare class ExternalItemDescriptions {
     Variant: int,
     SubType: int,
   ): string | "(No Description available)";
+
   /** Check if an entity is part of the describable entities. */
   hasDescription(entity: Entity): boolean;
 
   /** Replaces shorthand-representations of a character with the internal reference. */
   replaceShortMarkupStrings(text: string): string;
+
   /**
    * Generates a string with the defined pixel-length using a custom 1px wide character.
    *
    * This will only work for EID's specific custom font.
    */
   generatePlaceholderString(length: int): string;
+
   /**
    * Returns the `EIDInlineIcon` object of a given icon string.
    *
    * Can be used to validate an icon string.
    */
   getIcon(str: string): EIDInlineIcon;
+
   /**
    * Tries to read special markup used to generate icons for all Collectibles/Trinkets and the default Cards/Pills.
    * @returns An `EIDInlineIcon` Object or `null` if no parsing was possible.
    */
   createItemIconObject(str: string): EIDInlineIcon | null;
+
   /** Returns the icon for a given transformation name or ID. */
   getTransformationIcon(str: string): EIDInlineIcon;
 
   /** Returns the width of a given string in pixels */
   getStrWidth(str: string): int;
+
   /**
    * Searches through the given string and replaces Icon placeholders with icons.
    * Returns 2 values:
@@ -297,6 +324,7 @@ declare class ExternalItemDescriptions {
     textPosX?: int,
     textPosY?: int,
   ): LuaMultiReturn<[string, Array<[EIDInlineIcon, int]>]>;
+
   /**
    * Renders a list of given inline sprite objects returned by the
    * {@link EID.filterIconMarkup EID:filterIconMarkup()} function.
@@ -308,16 +336,20 @@ declare class ExternalItemDescriptions {
     posX: int,
     posY: int,
   ): void;
+
   /** Helper function to render Icons in specific EID settings. */
   renderIcon(spriteObj: Sprite, posX: int, posY: int): void;
+
   /** Returns the icon used for the bulletpoint. It will look at the first word in the given string. */
   handleBulletpointIcon(text: string): EIDInlineIcon;
+
   /**
    * Gets a `KColor` from a Markup-string (example Input: `"{{ColorText}}"`).
    *
    * @returns The `KColor` object and a `boolean` value indicating if the given string was a color markup or not.
    */
   getColor(str: string, baseKColor: KColor): LuaMultiReturn<[KColor, boolean]>;
+
   /**
    * Filters a given string and looks for `KColor` markup. Splits the text into subsections limited by them.
    *
@@ -333,6 +365,7 @@ declare class ExternalItemDescriptions {
    * @returns The string as a table of lines.
    */
   fitTextToWidth(str: string, textboxWidth: number): string[];
+
   /**
    * Renders a given string using the EID custom font. This will also apply any markup and render icons.
    *
@@ -357,6 +390,7 @@ declare class ExternalItemDescriptions {
     condition: (testDescription: string) => boolean,
     callback: (oldDescription: string) => string,
   ): void;
+
   /**
    * Removes a Description object modifier.
    * Used for altering descriptions. Examples: Spindown dice, Tarot Cloth, etc.
@@ -368,6 +402,7 @@ declare class ExternalItemDescriptions {
 
   /** Converts a given CollectibleID into the respective Spindown dice result. */
   getSpindownResult(collectibleID: int): int;
+
   /**
    * Converts a given table into a string containing the crafting icons of the table.
    *
@@ -378,6 +413,7 @@ declare class ExternalItemDescriptions {
    * Prefer {@link EID.tableToCraftingIconsMerged tableToCraftingIconsMerged()}, due to improved render performance.
    */
   tableToCraftingIconsFull(craftTable: int[]): string;
+
   /**
    * Converts a given table into a string containing the crafting icons of the table, which are also grouped to reduce render lag.
    *
@@ -392,14 +428,19 @@ declare class ExternalItemDescriptions {
 
   /** Creates a copy of a `KColor` object. This prevents overwriting existing `KColor` objects. */
   copyKColor(colorObj: KColor): KColor;
+
   /** Compares two KColors. Returns true if they are equal. */
   areColorsEqual(c1: KColor, c2: KColor): boolean;
+
   /** Get `KColor` object of "Entity Name" texts. */
   getNameColor(): KColor;
+
   /** Get `KColor` object of "Description" texts. */
   getTextColor(): KColor;
+
   /** Get `KColor` object of "Transformation" texts. */
   getTransformationColor(): KColor;
+
   /** Get `KColor` object of "Error" texts. */
   getErrorColor(): KColor;
 }
