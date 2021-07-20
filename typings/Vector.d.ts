@@ -16,11 +16,17 @@ declare class Vector {
   Resize(newLength: float): void;
   Resized(newLength: float): Vector;
   Rotated(angleDegrees: float): Vector;
-  __add(right: Vector): Vector;
-  __div(modifier: float): Vector;
-  __mul(modifier: float): Vector;
-  __sub(right: Vector): Vector;
-  __unm(right: Vector): Vector;
+
+  /** Use the "add()" method instead. */
+  __add(right: never): Vector;
+  /** Use the "div()" method instead. */
+  __div(modifier: never): Vector;
+  /** Use the "mul()" method instead. */
+  __mul(modifier: never): Vector;
+  /** Use the "sub()" method instead. */
+  __sub(right: never): Vector;
+  // Not implemented since it can cause the game to crash
+  // __unm(right: never): Vector;
 
   X: float;
   Y: float;
@@ -29,10 +35,12 @@ declare class Vector {
   static One: Vector;
   static Zero: Vector;
 
-  // Helper functions for adding and so forth so that you don't have to type the double underscore
+  // Helper functions for adding and so forth
   // https://typescripttolua.github.io/docs/advanced/language-extensions/#operator-map-types
   add: LuaAdditionMethod<Vector, Vector>;
-  div: LuaDivisionMethod<Vector, Vector>;
-  mul: LuaMultiplicationMethod<Vector, Vector>;
+  // Vector multiplication was extended to allow Vectors in Repentance
+  // However, this functionality does not apply to division
+  div: LuaDivisionMethod<number, Vector>;
+  mul: LuaMultiplicationMethod<number | Vector, Vector>;
   sub: LuaSubtractionMethod<Vector, Vector>;
 }

@@ -98,7 +98,7 @@ declare class EntityPlayer extends Entity {
    * @param playAnim If false, skips the appear animation for the familiars.
    */
   AddMinisaac(position: Vector, playAnim?: boolean): EntityFamiliar;
-  AddNullCostume(nullItemID: NullItemID): void;
+  AddNullCostume(nullItemID: NullItemID | int): void;
   AddPill(pillColor: PillColor | int): void;
   AddPlayerFormCostume(playerForm: PlayerForm): void;
   AddPrettyFly(): void;
@@ -116,6 +116,7 @@ declare class EntityPlayer extends Entity {
    */
   AddSwarmFlyOrbital(position: Vector): EntityFamiliar;
   /**
+   * If you provide an argument of 0 or an otherwise invalid trinket ID, the game will crash.
    * @param trinketType
    * @param addConsumables Default is true
    */
@@ -359,6 +360,7 @@ declare class EntityPlayer extends Entity {
   ): BombVariant | int;
   GetBoneHearts(): int;
   GetBrokenHearts(): int;
+  /** Returns 0 if there is no card. */
   GetCard(slotID: SlotId): Card | int;
   GetCardRNG(card: Card | int): RNG;
   GetCollectibleCount(): int;
@@ -452,6 +454,7 @@ declare class EntityPlayer extends Entity {
    * When called on any other character, returns nil.
    */
   GetOtherTwin(): EntityPlayer;
+  /** Returns 0 if there is no pill. */
   GetPill(slotID: SlotId): PillColor | int;
   GetPillRNG(pillEffect: PillEffect | int): RNG;
   GetPlayerType(): PlayerType | int;
@@ -486,6 +489,7 @@ declare class EntityPlayer extends Entity {
   GetTearRangeModifier(): int;
   GetTotalDamageTaken(): int;
   GetTractorBeam(): Entity;
+  /** Returns 0 if there is no trinket. */
   GetTrinket(trinketIndex: 0 | 1): int;
   GetTrinketMultiplier(): int;
   GetTrinketRNG(trinketType: TrinketType | int): RNG;
@@ -667,7 +671,8 @@ declare class EntityPlayer extends Entity {
     collectibleType: CollectibleType | int,
     keepPersistent: boolean,
   ): void;
-  TryRemoveNullCostume(nullItemID: NullItemID): void;
+  TryRemoveNullCostume(nullItemID: NullItemID | int): void;
+  /** If you provide an argument of 0 or an otherwise invalid trinket ID, the game will crash. */
   TryRemoveTrinket(trinketType: TrinketType | int): boolean;
   TryRemoveTrinketCostume(trinketType: TrinketType | int): void;
   TryUseKey(): boolean;
@@ -734,7 +739,7 @@ declare class EntityPlayer extends Entity {
   MaxFireDelay: int;
   MoveSpeed: float;
   QueuedItem: QueueItemData;
-  SecondaryActiveItem: ActiveItemDesc;
+  SecondaryActiveItem: ActiveItemDesc | null;
   ShotSpeed: float;
   SpriteScale: Vector;
   TearColor: Color;

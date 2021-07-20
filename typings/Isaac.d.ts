@@ -14,13 +14,15 @@ declare global {
     function CountBosses(): int;
     function CountEnemies(): int;
     /**
+     * This function is currently bugged (i.e. in Repentance v820) and should not be used.
+     * In the meantime, use "FindByType()" as a workaround.
      * @param spawner
      * @param entityType Default is EntityType.ENTITY_NULL.
      * @param variant Specifying -1 will return all variants. Default is -1.
      * @param subType Specifying -1 will return all subtypes. Default is -1.
      */
     function CountEntities(
-      spawner: Entity | null,
+      spawner: never, // Entity | null,
       entityType?: EntityType | int,
       variant?: EntityVariantForAC,
       subType?: int,
@@ -70,8 +72,24 @@ declare global {
     function GetItemIdByName(entityName: string): CollectibleType | int;
     function GetMusicIdByName(musicName: string): Music | int;
     function GetPillEffectByName(pillName: string): PillEffect | int;
-    function GetPlayer(playerID?: int): EntityPlayer | null;
     /**
+     * With no argument, it returns the 0th player.
+     * For the purposes of this definition, we assume that the 0th player always exists.
+     * However, if called in the menu, this function will return nil, so beware.
+     */
+    function GetPlayer(): EntityPlayer;
+    /**
+     * For the purposes of this definition, we assume that the 0th player always exists.
+     * However, if called in the menu, this function will return nil, so beware.
+     */
+    function GetPlayer(playerID: 0): EntityPlayer;
+    /**
+     * Before using the EntityPlayer object, you should check to see if it is equal to null and
+     * handle the error case.
+     */
+    function GetPlayer(playerID: int): EntityPlayer | null;
+    /**
+     * If the specified character does not exist, it returns -1.
      * @param playerName
      * @param tainted Default is false.
      */
@@ -83,6 +101,10 @@ declare global {
     function GetRoomEntities(): Entity[];
     function GetSoundIdByName(soundName: string): SoundEffect | int;
     function GetTextWidth(str: string): int;
+    /**
+     * Returns the current time in milliseconds since the program was launched.
+     * (This is simply a mapping to "os.clock()".)
+     */
     function GetTime(): int;
     function GetTrinketIdByName(trinketName: string): TrinketType | int;
     function GridSpawn(
