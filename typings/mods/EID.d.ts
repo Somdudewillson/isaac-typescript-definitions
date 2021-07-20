@@ -130,9 +130,10 @@ declare class ExternalItemDescriptions {
     language?: string,
   ): void;
 
-  /** Adds a new icon object with the shortcut defined in the "shortcut" variable (e.g. "{{shortcut}}" = your icon).
+  /**
+   * Adds a new icon object with the shortcut defined in the "shortcut" variable (e.g. "{{shortcut}}" = your icon).
    *
-   * Shortcuts are case Sensitive! Shortcuts can be overridden with this function to allow for full control over everything.
+   * Shortcuts are case-sensitive! Shortcuts can be overridden with this function to allow for full control over everything.
    *
    * Setting "animationFrame" to -1 will play the animation.
    * The spriteObject needs to be of class Sprite() and have an .anm2 loaded to do this.
@@ -154,7 +155,7 @@ declare class ExternalItemDescriptions {
   /**
    * Adds a new color object with the shortcut defined in the "shortcut" variable (e.g. "{{shortcut}}" = your color).
    *
-   * Shortcuts are case Sensitive! Shortcuts can be overridden with this function to allow for full control over everything.
+   * Shortcuts are case-sensitive! Shortcuts can be overridden with this function to allow for full control over everything.
    *
    * Define a callback to let it be called when interpreting the color-markup. Define a `KColor` otherwise for a simple color change.
    */
