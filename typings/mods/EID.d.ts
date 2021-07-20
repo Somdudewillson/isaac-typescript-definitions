@@ -12,9 +12,9 @@ declare type EIDDescriptionObj = {
 };
 
 /**
- * @param LeftOffset defaults to -1
- * @param TopOffset defaults to 0
- * @param SpriteObject defaults to `EID.InlineIconSprite`
+ * @param LeftOffset Defaults to -1.
+ * @param TopOffset Defaults to 0.
+ * @param SpriteObject Defaults to `EID.InlineIconSprite`.
  */
 declare type EIDInlineIcon = [
   Animationname: string,
@@ -138,8 +138,8 @@ declare class ExternalItemDescriptions {
    * Setting "animationFrame" to -1 will play the animation.
    * The spriteObject needs to be of class Sprite() and have an .anm2 loaded to do this.
    *
-   * @param leftOffset Defaults to -1
-   * @param topOffset Defaults to 0
+   * @param leftOffset Defaults to -1.
+   * @param topOffset Defaults to 0.
    */
   addIcon(
     shortcut: string,
