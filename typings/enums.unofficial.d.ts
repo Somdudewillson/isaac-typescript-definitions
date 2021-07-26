@@ -76,6 +76,50 @@ declare const enum FireplaceVariant {
   MOVEABLE_PURPLE = 13,
 }
 
+/** For EntityType.ENTITY_FALLEN (81) */
+declare const enum FallenVariant {
+  FALLEN = 0,
+  KRAMPUS = 1,
+}
+
+/** For EntityType.ENTITY_THE_HAUNT (260) */
+declare const enum HauntVariant {
+  HAUNT = 0,
+  LIL_HAUNT = 10,
+}
+
+/** For EntityType.ENTITY_DINGLE (261) */
+declare const enum DingleVariant {
+  DINGLE = 0,
+  DANGLE = 1,
+}
+
+/** For EntityType.ENTITY_URIEL (271) and EntityType.ENTITY_GABRIEL (272) */
+declare const enum AngelVariant {
+  NORMAL = 0,
+  FALLEN = 1,
+}
+
+/** For EntityType.ENTITY_THE_LAMB (273) */
+declare const enum LambVariant {
+  LAMB = 0,
+  BODY = 10,
+}
+
+/** For EntityType.ENTITY_ROTGUT (911) */
+declare const enum RotgutVariant {
+  PHASE_1_HEAD = 0,
+  PHASE_2_MAGGOT = 1,
+  PHASE_3_HEART = 2,
+}
+
+/** For EntityType.ENTITY_MOTHER (912) */
+declare const enum MotherVariant {
+  PHASE_1 = 0,
+  PHASE_2 = 10,
+  BALL = 100,
+}
+
 /** For GridEntityType.GRID_POOP (14) */
 declare const enum PoopVariant {
   NORMAL = 0,
