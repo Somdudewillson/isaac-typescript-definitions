@@ -19,7 +19,7 @@ interface StageAPICallbackParameters {
   [StageCallback.PRE_STAGEAPI_NEW_ROOM]: [callback: () => void];
   [StageCallback.POST_OVERRIDDEN_GRID_BREAK]: [
     callback: (
-      grindex: int,
+      gridIndex: int,
       grid: GridEntity,
       justBrokenGridSpawns: LuaTable<int, RemovedEntityData> | null,
     ) => false | void,

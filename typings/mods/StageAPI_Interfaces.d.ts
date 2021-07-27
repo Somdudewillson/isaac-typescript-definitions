@@ -30,7 +30,7 @@ declare interface RoomGfx {
   shadingPrefix: string;
 }
 declare interface RoomsList {
-  AddRooms(roomfiles: string[] | CustomRoomConfig[]): void;
+  AddRooms(roomFiles: string[] | CustomRoomConfig[]): void;
 }
 declare interface RemovedEntityData {
   Type: EntityType;
@@ -119,7 +119,7 @@ declare interface GridGfx {
    */
   SetPits(
     filename: string,
-    altpitsfilename?: string,
+    altPitsFilename?: string,
     hasExtraFrames?: boolean,
   ): void;
   /**
@@ -131,7 +131,7 @@ declare interface GridGfx {
    */
   SetPits(
     filenames: Array<{ File: string; HasExtraFrames?: boolean }>,
-    altpitsfilenames: Array<{ File: string; HasExtraFrames?: boolean }>,
+    altPitsFilenames: Array<{ File: string; HasExtraFrames?: boolean }>,
   ): void;
   /** Sets the path to the bridge gfx spritesheet. */
   SetBridges(filename: string): void;
