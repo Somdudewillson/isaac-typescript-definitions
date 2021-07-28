@@ -76,6 +76,12 @@ declare const enum FireplaceVariant {
   MOVEABLE_PURPLE = 13,
 }
 
+/** For EntityType.ENTITY_MOM (45) */
+declare const enum MomVariant {
+  MOM = 0,
+  STOMP = 10,
+}
+
 /** For EntityType.ENTITY_FALLEN (81) */
 declare const enum FallenVariant {
   FALLEN = 0,
@@ -118,6 +124,30 @@ declare const enum MotherVariant {
   PHASE_1 = 0,
   PHASE_2 = 10,
   BALL = 100,
+}
+
+/** For EntityType.ENTITY_BEAST (951) */
+declare const enum BeastVariant {
+  BEAST = 0,
+  STALACTITE = 1,
+  ROCK_PROJECTILE = 2,
+  SOUL = 3,
+  ULTRA_FAMINE = 10,
+  ULTRA_FAMINE_FLY = 11,
+  ULTRA_PESTILENCE = 20,
+  ULTRA_PESTILENCE_FLY = 21,
+  ULTRA_PESTILENCE_MAGGOT = 22,
+  ULTRA_PESTILENCE_FLY_BALL = 23,
+  ULTRA_WAR = 30,
+  ULTRA_WAR_BOMB = 31,
+  ULTRA_DEATH = 40,
+  ULTRA_DEATH_SCYTHE = 41,
+  ULTRA_DEATH_HEAD = 42,
+  BACKGROUND_BEAST = 100,
+  BACKGROUND_FAMINE = 101,
+  BACKGROUND_PESTILENCE = 102,
+  BACKGROUND_WAR = 103,
+  BACKGROUND_DEATH = 104,
 }
 
 /** For GridEntityType.GRID_POOP (14) */
