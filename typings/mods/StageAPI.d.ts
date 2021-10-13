@@ -126,6 +126,23 @@ interface StageAPIInterface {
 
   InitCustomLevel(levelMap: StageAPILevelMap, levelStartRoom: boolean): void;
 
+  /**
+   * Changes the current room's backdrop graphics.
+   * @param backdrop The {@link StageAPIBackdrop} to replace the current room's backdrop with.
+   * @param justWalls Only replace wall graphics.  Optional.
+   * @param storeBackdropEnts If true, will return an array containing the `Entity`s used to render the backdrop
+   */
+  ChangeBackdrop(
+    backdrop: StageAPIBackdrop,
+    justWalls?: boolean,
+    storeBackdropEnts?: false,
+  ): void;
+  ChangeBackdrop(
+    backdrop: StageAPIBackdrop,
+    justWalls: boolean,
+    storeBackdropEnts: true,
+  ): Entity[];
+
   RoomGfx(
     backdrop: StageAPIBackdrop,
     gridGfx: StageAPIGridGfx | undefined,
