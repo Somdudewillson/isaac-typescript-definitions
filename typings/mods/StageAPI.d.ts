@@ -69,6 +69,17 @@ interface StageAPIInterface {
     suffix: string,
   ): StageAPIBackdrop;
 
+  ChangeBackdrop(
+    backdrop: StageAPIBackdrop,
+    justWalls?: boolean,
+    storeBackdropEntities?: false,
+  ): void;
+  ChangeBackdrop(
+    backdrop: StageAPIBackdrop,
+    justWalls: boolean,
+    storeBackdropEntities: true,
+  ): Entity[];
+
   /** Function to create a custom floor layout. */
   CreateMapFromRoomsList(roomsList: StageAPIRoomsList): StageAPILevelMap;
 
@@ -126,7 +137,7 @@ interface StageAPIInterface {
 
   InitCustomLevel(levelMap: StageAPILevelMap, levelStartRoom: boolean): void;
 
-  /**
+  /** Constructor for the RoomGfx object. */
    * Changes the current room's backdrop graphics.
    * @param backdrop The {@link StageAPIBackdrop} to replace the current room's backdrop with.
    * @param justWalls Only replace wall graphics.  Optional.
