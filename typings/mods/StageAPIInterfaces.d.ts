@@ -1,54 +1,17 @@
-declare interface VanillaStage {
-  NormalStage: true;
-  Stage: LevelStage;
-  StageType: StageType;
-}
-
-declare type StageOverrideStage = {
-  OverrideStage: LevelStage;
-  OverrideStageType: StageType;
-  ReplaceWith: CustomStage | VanillaStage;
-};
-
-declare interface DoorInfo {
-  RequireCurrent?: RoomType[];
-  RequireTarget?: RoomType[];
-  RequireEither?: RoomType[];
-  NotCurrent?: RoomType[];
-  NotTarget?: RoomType[];
-  NotEither?: RoomType[];
-  IsBossAmbush?: boolean;
-}
-
-declare interface Backdrop {
+declare interface StageAPIBackdrop {
   NFloors: string[];
   LFloors: string[];
   Corners: string[];
   Walls: string[];
 }
 
-declare interface RoomGfx {
-  Backdrop: Sprite;
-  GridGfx: Sprite;
-  shadingName: string;
-  shadingPrefix: string;
+declare interface StageAPICustomGridEntity {
+  PersistentData: {
+    TransitionAnim: int;
+  };
 }
 
-declare interface RoomsList {
-  AddRooms(roomFiles: string[] | CustomRoomConfig[]): void;
-}
-
-declare interface RemovedEntityData {
-  Type: EntityType;
-  Variant: int;
-  SubType: int;
-  Position: Vector;
-  Velocity: Vector;
-  Spawner: Entity | null;
-  Seed: number;
-}
-
-declare interface CustomStage {
+declare interface StageAPICustomStage {
   /**
    * Automatically aliases the new stage to the old one, if noSetAlias is not set.
    *
@@ -75,10 +38,10 @@ declare interface CustomStage {
   SetStageNumber(num: int): void;
 
   /** Sets the stage this `CustomStage` overrides. */
-  SetReplace(stageOverrideStage: StageOverrideStage): void;
+  SetReplace(stageOverrideStage: StageAPIStageOverrideStage): void;
 
   /** Sets the stage after this one. */
-  SetNextStage(nextStage: CustomStage | VanillaStage): void;
+  SetNextStage(nextStage: StageAPICustomStage | StageAPIVanillaStage): void;
 
   /**
    * Sets the {@link RoomGfx} used by the stage.
@@ -88,12 +51,12 @@ declare interface CustomStage {
    * Can be a string identifier, a {@link RoomType}, or an array of either.
    */
   SetRoomGfx(
-    roomGfx: RoomGfx,
+    roomGfx: StageAPIRoomGfx,
     roomTypes: string | int | string[] | int[],
   ): void;
 
   /** Sets the list room layouts used by the stage. */
-  SetRooms(roomsList: RoomsList): void;
+  SetRooms(roomsList: StageAPIRoomsList): void;
 
   /** Sets the music used by the stage. */
   SetMusic(musicID: int, roomType: RoomType): void;
@@ -105,7 +68,7 @@ declare interface CustomStage {
    * Sets the paths to the "spot" graphic,
    * the patch of ground underneath the boss and player sprites in the pre-boss cutscene.
    */
-  SetSpots(bossSpot: string | null, playerSpot: string | null): void;
+  SetSpots(bossSpot: string | undefined, playerSpot: string | undefined): void;
 
   /** Sets the available bosses for the stage. */
   SetBosses(bossIDs: int[]): void;
@@ -130,7 +93,17 @@ declare interface CustomStage {
   IsStage(noAlias: boolean): boolean;
 }
 
-declare interface GridGfx {
+declare interface StageAPIDoorInfo {
+  RequireCurrent?: RoomType[];
+  RequireTarget?: RoomType[];
+  RequireEither?: RoomType[];
+  NotCurrent?: RoomType[];
+  NotTarget?: RoomType[];
+  NotEither?: RoomType[];
+  IsBossAmbush?: boolean;
+}
+
+declare interface StageAPIGridGfx {
   /** Sets the path to the gfx spritesheet for the specified {@link GridEntity}. */
   SetGrid(filename: string, GridEntityType: GridEntityType, variant: int): void;
 
@@ -170,8 +143,56 @@ declare interface GridGfx {
   SetDecorations(filename: string): void;
 
   /** Sets the path to the gfx spritesheet of the specified subset of doors. */
-  AddDoors(filename: string, DoorInfo: DoorInfo): void;
+  AddDoors(filename: string, DoorInfo: StageAPIDoorInfo): void;
 
   /** Sets the path to the pay-to-play door gfx spritesheet. */
   SetPayToPlayDoor(filename: string): void;
+}
+
+declare interface StageAPILevelMap {
+  GetRoom(roomData: StageAPIRoomData): StageAPIRoom;
+  Map: StageAPIRoomData[];
+}
+
+declare interface StageAPIRemovedEntityData {
+  Type: EntityType;
+  Variant: int;
+  SubType: int;
+  Position: Vector;
+  Velocity: Vector;
+  Spawner: Entity | undefined;
+  Seed: number;
+}
+
+declare interface StageAPIRoomData {
+  MapID: number;
+}
+
+declare interface StageAPIRoomGfx {
+  Backdrop: Sprite;
+  GridGfx: Sprite;
+  shadingName: string;
+  shadingPrefix: string;
+}
+
+declare interface StageAPIRoomsList {
+  AddRooms(roomFiles: string[] | StageAPICustomRoomConfig[]): void;
+}
+
+declare interface StageAPIRoom {
+  Layout: {
+    Name: string;
+  };
+}
+
+declare type StageAPIStageOverrideStage = {
+  OverrideStage: LevelStage;
+  OverrideStageType: StageType;
+  ReplaceWith: StageAPICustomStage | StageAPIVanillaStage;
+};
+
+declare interface StageAPIVanillaStage {
+  NormalStage: true;
+  Stage: LevelStage;
+  StageType: StageType;
 }

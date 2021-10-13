@@ -1,6 +1,6 @@
-declare const MMC: MusicModCallback;
+declare const MMC: MusicModCallback | undefined;
 
-declare class MusicModCallback {
+declare interface MusicModCallback {
   /**
    * Adds a callback to be triggered whenever a track is about to play. Used for changing music.
    *
@@ -11,7 +11,7 @@ declare class MusicModCallback {
    * - a LuaMultiReturn<[jingleID: Music, trackID: Music]> to play a jingle and queue the track
    * - 0 to prevent the track from playing, and allow the current one to continue
    * - -1 to stop all music
-   * - null to continue to internal code
+   * - undefined to continue to internal code
    * @param tracks The tracks that will trigger your function call.
    * If this argument is omitted, all music changes will trigger this callback.
    */
@@ -23,7 +23,7 @@ declare class MusicModCallback {
       | Music
       | LuaMultiReturn<[jingleID: Music, trackID: Music]>
       | number
-      | null,
+      | undefined,
     ...tracks: Music[]
   ): void;
 

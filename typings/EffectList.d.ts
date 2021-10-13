@@ -1,5 +1,5 @@
-declare class EffectList {
-  Get(idx: int): TemporaryEffect | null;
+declare interface EffectList {
+  Get(idx: int): TemporaryEffect | undefined;
 
   Size: int;
 }

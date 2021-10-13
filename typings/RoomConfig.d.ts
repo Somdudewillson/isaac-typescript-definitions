@@ -1,6 +1,6 @@
 // This is "RoomConfig::Room" in the docs
 
-declare class RoomConfig {
+declare interface RoomConfig {
   /**
    * This is not the same thing as the Difficulty enum.
    * Each room has an arbitrarily set difficulty of 0, 1, 2, 5, or 10.
@@ -13,7 +13,7 @@ declare class RoomConfig {
   Shape: RoomShape;
   SpawnCount: int;
   Spawns: SpawnList;
-  StageID: int;
+  StageID: StageID;
   Subtype: int;
   Type: RoomType;
   Variant: int;

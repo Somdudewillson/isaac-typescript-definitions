@@ -1,6 +1,6 @@
-declare function EntityRef(this: void, entity: Entity | null): EntityRef;
+declare function EntityRef(this: void, entity: Entity | undefined): EntityRef;
 
-declare class EntityRef {
+declare interface EntityRef {
   Entity: Entity;
   IsCharmed: boolean;
   IsFriendly: boolean;

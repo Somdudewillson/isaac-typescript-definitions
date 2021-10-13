@@ -1,12 +1,13 @@
 declare function Sprite(this: void): Sprite;
 
-declare class Sprite {
+declare interface Sprite {
   GetAnimation(): string;
   GetDefaultAnimation(): string;
   GetDefaultAnimationName(): Readonly<string>;
   GetFilename(): string;
   GetFrame(): int;
   GetLayerCount(): int;
+  GetOverlayAnimation(): string;
   GetOverlayFrame(): int;
   GetTexel(samplePos: Vector, renderPos: Vector, alphaThreshold: float): Color;
   IsEventTriggered(eventName: string): boolean;

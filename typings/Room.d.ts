@@ -1,4 +1,4 @@
-declare class Room {
+declare interface Room {
   /**
    * @param position1
    * @param position2
@@ -47,7 +47,7 @@ declare class Room {
   GetDecorationSeed(): int;
   GetDeliriumDistance(): int;
   GetDevilRoomChance(): float;
-  GetDoor(doorSlot: DoorSlot): GridEntityDoor | null;
+  GetDoor(doorSlot: DoorSlot): GridEntityDoor | undefined;
   GetDoorSlotPosition(doorSlot: DoorSlot): Vector;
   GetDungeonRockIdx(): int;
   /**
@@ -58,14 +58,15 @@ declare class Room {
   GetFrameCount(): int;
   GetGridCollision(gridIndex: int): GridCollisionClass;
   GetGridCollisionAtPos(position: Vector): GridCollisionClass;
-  GetGridEntity(index: int): GridEntity | null;
-  GetGridEntityFromPos(position: Vector): GridEntity | null;
+  GetGridEntity(index: int): GridEntity | undefined;
+  GetGridEntityFromPos(position: Vector): GridEntity | undefined;
   GetGridHeight(): int;
   GetGridIndex(position: Vector): int;
   GetGridPath(index: int): int;
   GetGridPathFromPos(index: int): int;
   GetGridPosition(gridIndex: int): Vector;
   GetGridSize(): int;
+  /** Note that if you call this in the main menu, the game will sometimes crash. */
   GetGridWidth(): int;
   GetLaserTarget(position: Vector, direction: Vector): Vector;
   GetLightingAlpha(): float;
@@ -136,7 +137,11 @@ declare class Room {
     seed: int,
     varData: int,
   ): boolean;
-  TryMakeBridge(pit: GridEntity): boolean;
+  /**
+   * This function was updated to take two arguments in Repentance. The reason for this is that
+   * bridges can be spike bridges, so the specifying the type of rock is necessary.
+   */
+  TryMakeBridge(pit: GridEntity, rock: GridEntity): boolean;
   TryPlaceLadder(
     playerPos: Vector,
     playerVelocity: Vector,

@@ -1,4 +1,4 @@
-declare class EntityPickup extends Entity {
+declare interface EntityPickup extends Entity {
   AppearFast(): void;
   CanReroll(): boolean;
   GetCoinValue(): int;
@@ -24,7 +24,7 @@ declare class EntityPickup extends Entity {
   PlayDropSound(): void;
   PlayPickupSound(): void;
   /**
-   * @param player Default is nil.
+   * @param player Default is undefined.
    */
   TryOpenChest(player?: EntityPlayer): boolean;
 

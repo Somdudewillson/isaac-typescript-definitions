@@ -1,4 +1,4 @@
-declare class Level {
+declare interface Level {
   AddAngelRoomChance(chance: float): void;
   AddCurse(levelCurse: LevelCurse | int, showName: boolean): void;
   ApplyBlueMapEffect(): void;
@@ -18,7 +18,12 @@ declare class Level {
   GetAngelRoomChance(): float;
   GetCanSeeEverything(): boolean;
   GetCurrentRoom(): Room;
-  GetCurrentRoomDesc(): Readonly<RoomDescriptor>;
+  /**
+   * Note that this returns a read-only copy of the RoomDescriptor object and writing to any of its
+   * properties will fail. If you need to update anything in this object, use the
+   * `GetRoomByIdx(currentRoomIndex)` method instead.
+   */
+  GetCurrentRoomDesc(): RoomDescriptorReadOnly;
   GetCurrentRoomIndex(): int;
   GetCurseName(): string;
   GetCurses(): LevelCurse | int;
@@ -27,7 +32,7 @@ declare class Level {
   GetEnterPosition(): Vector;
   GetHeartPicked(): boolean;
   GetLastBossRoomListIndex(): int;
-  GetLastRoomDesc(): Readonly<RoomDescriptor>;
+  GetLastRoomDesc(): RoomDescriptorReadOnly;
   /**
    * @param levelStage Default value is the current stage.
    * @param stageType Default value is the current stage type.
@@ -49,7 +54,7 @@ declare class Level {
    * @param roomIdx
    * @param dimension Default is Dimension.CURRENT.
    */
-  GetRoomByIdx(roomIdx: int, dimension?: Dimension): RoomDescriptor;
+  GetRoomByIdx(roomIndex: int, dimension?: Dimension): RoomDescriptor;
   GetRoomCount(): int;
   GetRooms(): RoomList;
   GetStage(): LevelStage;
@@ -87,6 +92,9 @@ declare class Level {
   ShowName(sticky: boolean): void;
   UncoverHiddenDoor(currentRoomIdx: int, doorSlot: DoorSlot): void;
   Update(): void;
+  /**
+   * Call this method to update the mini-map after changing the `DisplayFlags` property of a room.
+   */
   UpdateVisibility(): void;
 
   DungeonReturnPosition: Vector;

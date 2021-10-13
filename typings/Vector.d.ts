@@ -1,12 +1,20 @@
 declare function Vector(this: void, x: float, y: float): Vector;
 
-declare class Vector {
+declare interface Vector {
   Clamp(minX: float, minY: float, maxX: float, maxY: float): void;
   Clamped(minX: float, minY: float, maxX: float, maxY: float): Vector;
   Cross(secondVector: Vector): float;
   Distance(secondVector: Vector): float;
   DistanceSquared(secondVector: Vector): float;
   Dot(secondVector: Vector): float;
+  /**
+   * The game returns degrees in the following format:
+   *
+   * - Right: 0
+   * - Up: -90
+   * - Left: 180
+   * - Down: 90
+   */
   GetAngleDegrees(): float;
   Length(): float;
   LengthSquared(): float;
@@ -31,10 +39,6 @@ declare class Vector {
   X: float;
   Y: float;
 
-  static FromAngle(this: void, angleDegrees: float): Vector;
-  static One: Vector;
-  static Zero: Vector;
-
   // Helper functions for adding and so forth
   // https://typescripttolua.github.io/docs/advanced/language-extensions/#operator-map-types
   add: LuaAdditionMethod<Vector, Vector>;
@@ -43,4 +47,10 @@ declare class Vector {
   div: LuaDivisionMethod<number, Vector>;
   mul: LuaMultiplicationMethod<number | Vector, Vector>;
   sub: LuaSubtractionMethod<Vector, Vector>;
+}
+
+declare namespace Vector {
+  function FromAngle(this: void, angleDegrees: float): Vector;
+  const One: Vector;
+  const Zero: Vector;
 }

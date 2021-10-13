@@ -1,6 +1,6 @@
-declare const EID: ExternalItemDescriptions;
+declare const EID: EIDInterface | undefined;
 
-declare type EIDDescriptionObj = {
+declare interface EIDDescriptionObject {
   ItemType: int;
   ItemVariant: int;
   RealID: int;
@@ -9,7 +9,7 @@ declare type EIDDescriptionObj = {
   Name: string;
   Description: string;
   Transformation: string;
-};
+}
 
 /**
  * @param LeftOffset Defaults to -1.
@@ -33,7 +33,7 @@ declare type EIDTransformationTargetType =
   | "pill"
   | "entity";
 
-declare class ExternalItemDescriptions {
+declare interface EIDInterface {
   /** Gets the size of the screen. */
   GetScreenSize(): Vector;
 
@@ -94,12 +94,12 @@ declare class ExternalItemDescriptions {
   /**
    * Adds a description for an entity.
    *
-   * When subtype is -1 or null, it will affect all subtypes of that entity.
+   * When subtype is -1 or undefined, it will affect all subtypes of that entity.
    */
   addEntity(
     id: int,
     variant: int,
-    subtype: int | null,
+    subtype: int | undefined,
     entityName: string,
     description: string,
     language?: string,
@@ -124,8 +124,8 @@ declare class ExternalItemDescriptions {
     animationFrame: int,
     width: int,
     height: int,
-    leftOffset: float | null,
-    topOffset: float | null,
+    leftOffset: float | undefined,
+    topOffset: float | undefined,
     spriteObject: Sprite,
   ): void;
 
@@ -160,7 +160,10 @@ declare class ExternalItemDescriptions {
   alterTextPos(newPosVector: Vector): void;
 
   /** Appends a given string to the description of a given `EIDDescriptionObj`. */
-  appendToDescription(descObj: EIDDescriptionObj, appendString: string): void;
+  appendToDescription(
+    descObj: EIDDescriptionObject,
+    appendString: string,
+  ): void;
 
   /** Compares two KColors. Returns true if they are equal. */
   areColorsEqual(c1: KColor, c2: KColor): boolean;
@@ -186,9 +189,9 @@ declare class ExternalItemDescriptions {
    * Tries to read special markup used to generate icons for all collectibles/trinkets and the
    * default cards/pills.
    *
-   * @returns An `EIDInlineIcon` Object or `null` if no parsing was possible.
+   * @returns An `EIDInlineIcon` Object or `undefined` if no parsing was possible.
    */
-  createItemIconObject(str: string): EIDInlineIcon | null;
+  createItemIconObject(str: string): EIDInlineIcon | undefined;
 
   /** Creates a new transformation. */
   createTransformation(
@@ -202,7 +205,7 @@ declare class ExternalItemDescriptions {
    * turned off again using
    * {@link EID.hidePermanentText EID:hidePermanentText()}.
    */
-  displayPermanentText(descriptionObject: EIDDescriptionObj): void;
+  displayPermanentText(descriptionObject: EIDDescriptionObject): void;
 
   /**
    * Filters a given string and looks for `KColor` markup.
@@ -260,21 +263,29 @@ declare class ExternalItemDescriptions {
    *
    * Falls back to English if it doesn't exist.
    */
-  getDescriptionData(Type: int, Variant: int, SubType: int): EIDDescriptionObj;
+  getDescriptionData(
+    Type: int,
+    Variant: int,
+    SubType: int,
+  ): EIDDescriptionObject;
 
   /**
    * Returns the specified object table in the current language.
    *
    * Falls back to English if it doesn't exist.
    */
-  getDescriptionEntry(objTable: string, objID?: string): EIDDescriptionObj;
+  getDescriptionEntry(objTable: string, objID?: string): EIDDescriptionObject;
 
   /**
    * Returns the description object of the specified entity.
    *
    * Falls back to English if the objID isn't available.
    */
-  getDescriptionObj(Type: int, Variant: int, SubType: int): EIDDescriptionObj;
+  getDescriptionObj(
+    Type: int,
+    Variant: int,
+    SubType: int,
+  ): EIDDescriptionObject;
 
   /** Get `KColor` object of "Error" texts. */
   getErrorColor(): KColor;
@@ -299,13 +310,13 @@ declare class ExternalItemDescriptions {
    * Fetches description table from the legacy mod descriptions if they exist.
    *
    * @returns ["", "", description], ["", name, description],
-   * or `null` (if there is no legacy description).
+   * or `undefined` (if there is no legacy description).
    */
   getLegacyModDescription(
     Type: int,
     Variant: int,
     SubType: int,
-  ): ["", "", string] | ["", string, string] | null;
+  ): ["", "", string] | ["", string, string] | undefined;
 
   /** Get `KColor` object of "Entity Name" texts. */
   getNameColor(): KColor;
@@ -393,8 +404,8 @@ declare class ExternalItemDescriptions {
    * Example: `"1,2,3"`, removing `2` will return `"1,3"`.
    */
   removeEntryFromString(
-    sourceTable: LuaTable<never, string> | string[],
-    entryKey: never,
+    sourceTable: LuaTable<string | number, string> | string[],
+    entryKey: string | number,
     entryValue: string,
   ): void;
 

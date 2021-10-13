@@ -1,12 +1,16 @@
-declare class RoomDescriptor {
+declare interface RoomDescriptor {
   // AllowedDoors: DoorSet; // DoorSet is not implemented
   AwardSeed: int;
   ChallengeDone: boolean;
   Clear: boolean;
   ClearCount: int;
-  Data: RoomConfig;
+  Data: RoomConfig | undefined;
   DecorationSeed: int;
   DeliriumDistance: int;
+  /**
+   * A composition of zero or more DisplayFlag. After modifying this value, you must call
+   * `Level.UpdateVisibility()` for it to take effect.
+   */
   DisplayFlags: int;
   GridIndex: int;
   HasWater: boolean;

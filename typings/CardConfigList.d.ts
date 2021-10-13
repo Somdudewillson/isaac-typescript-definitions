@@ -1,5 +1,5 @@
-declare class CardConfigList {
-  Get(idx: int): ItemConfigCard | null;
+declare interface CardConfigList {
+  Get(idx: int): ItemConfigCard | undefined;
 
   readonly Size: int;
 }

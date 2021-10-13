@@ -1,5 +1,5 @@
-declare class SpawnList {
-  Get(idx: int): RoomConfigSpawn | null;
+declare interface SpawnList {
+  Get(idx: int): RoomConfigSpawn | undefined;
 
   Size: int;
 }

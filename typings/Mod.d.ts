@@ -1,3 +1,21 @@
+/**
+ * The Lua object corresponding to this interface is defined as a local variable in the
+ * "scripts/main.lua" file.
+ */
+declare interface Mod {
+  AddCallback<T extends keyof CallbackParameters>(
+    modCallbacks: T,
+    ...args: CallbackParameters[T]
+  ): void;
+  HasData(): boolean;
+  LoadData(): string;
+  RemoveCallback(callbackID: ModCallbacks, callback: () => void): void;
+  RemoveData(): void;
+  SaveData(data: string): void;
+
+  Name: string;
+}
+
 interface CallbackParameters {
   [ModCallbacks.MC_NPC_UPDATE]: [
     callback: (npc: EntityNPC) => void,
@@ -61,12 +79,10 @@ interface CallbackParameters {
     ) => boolean | void,
     entityType?: EntityType | int,
   ];
-  [ModCallbacks.MC_POST_CURSE_EVAL]: [
-    callback: (curses: LevelCurse | int) => LevelCurse | int | void,
-  ];
+  [ModCallbacks.MC_POST_CURSE_EVAL]: [callback: (curses: int) => int | void];
   [ModCallbacks.MC_INPUT_ACTION]: [
     callback: (
-      entity: Entity | null,
+      entity: Entity | undefined,
       inputHook: InputHook,
       buttonAction: ButtonAction,
     ) => boolean | float | void,
@@ -350,19 +366,4 @@ interface CallbackParameters {
       seed: int,
     ) => [EntityType | int, int, int] | void,
   ];
-}
-
-// From "main.lua"
-declare class Mod {
-  AddCallback<T extends keyof CallbackParameters>(
-    callbackID: T,
-    ...args: CallbackParameters[T]
-  ): void;
-  HasData(): boolean;
-  LoadData(): string;
-  RemoveCallback(callbackID: ModCallbacks, callback: () => void): void;
-  RemoveData(): void;
-  SaveData(data: string): void;
-
-  Name: string;
 }
